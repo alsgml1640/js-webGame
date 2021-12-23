@@ -33,29 +33,47 @@
     <input readonly id="operator" />
     <input readonly type="number" id="result" />
     <div class="row">
-      <button id="num-7">7</button>
-      <button id="num-8">8</button>
-      <button id="num-9">9</button>
+      <button id="num-7" data-num="7">7</button>
+      <button id="num-8" data-num="8">8</button>
+      <button id="num-9" data-num="9">9</button>
       <button id="plus">+</button>
     </div>
     <div class="row">
-      <button id="num-4">4</button>
-      <button id="num-5">5</button>
-      <button id="num-6">6</button>
+      <button id="num-4" data-num="4">4</button>
+      <button id="num-5" data-num="5">5</button>
+      <button id="num-6" data-num="6">6</button>
       <button id="minus">-</button>
     </div>
     <div class="row">
-      <button id="num-1">1</button>
-      <button id="num-2">2</button>
-      <button id="num-3">3</button>
+      <button id="num-1" data-num="1">1</button>
+      <button id="num-2" data-num="2">2</button>
+      <button id="num-3" data-num="3">3</button>
       <button id="divide">/</button>
     </div>
     <div class="row">
       <button id="clear">C</button>
-      <button id="num-0">0</button>
+      <button id="num-0" data-num="0">0</button>
       <button id="calculate">=</button>
       <button id="multiply">x</button>
     </div>
-    <script></script>
+    <script>
+      const $resultInput = document.querySelector("#result"); // 숫자확인란
+      const $operator = document.querySelector("#operator"); // 연산자
+
+      const onClickNumber = (event) => {
+        console.log(event.target.dataset.num);
+        $resultInput.value += event.target.dataset.num;
+      };
+
+      document.querySelector("#num-1").addEventListener("click", onClickNumber);
+      document.querySelector("#num-2").addEventListener("click", onClickNumber);
+      document.querySelector("#num-3").addEventListener("click", onClickNumber);
+      document.querySelector("#num-4").addEventListener("click", onClickNumber);
+      document.querySelector("#num-5").addEventListener("click", onClickNumber);
+      document.querySelector("#num-6").addEventListener("click", onClickNumber);
+      document.querySelector("#num-7").addEventListener("click", onClickNumber);
+      document.querySelector("#num-8").addEventListener("click", onClickNumber);
+      document.querySelector("#num-9").addEventListener("click", onClickNumber);
+    </script>
   </body>
 </html>
