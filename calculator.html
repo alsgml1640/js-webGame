@@ -57,14 +57,36 @@
       <button id="multiply">x</button>
     </div>
     <script>
+      // 첫번째 숫자 입력시
+      // 연산지 입력후
+      // 두번째 숫자 입력
+      /// = 입력시 결과 값
+      /// = 말고 다른 연산자
+
       const $resultInput = document.querySelector("#result"); // 숫자확인란
       const $operator = document.querySelector("#operator"); // 연산자
 
+      let numOne = "";
+      let numTwo = "";
+      let operator = "";
+      let resultNum = "";
+
       const onClickNumber = (event) => {
-        console.log(event.target.dataset.num);
-        $resultInput.value += event.target.dataset.num;
+        // 비어있다
+        if (!operator) {
+          numOne += event.target.textContent;
+          $resultInput.value += event.target.textContent;
+          return;
+        }
+        // 비어있지않다
+        if (!numTwo) {
+          $resultInput.value = "";
+        }
+        numTwo += event.target.textContent;
+        $resultInput.value += event.target.textContent;
       };
 
+      // 숫자 입력
       document.querySelector("#num-1").addEventListener("click", onClickNumber);
       document.querySelector("#num-2").addEventListener("click", onClickNumber);
       document.querySelector("#num-3").addEventListener("click", onClickNumber);
@@ -74,6 +96,90 @@
       document.querySelector("#num-7").addEventListener("click", onClickNumber);
       document.querySelector("#num-8").addEventListener("click", onClickNumber);
       document.querySelector("#num-9").addEventListener("click", onClickNumber);
+      document.querySelector("#num-0").addEventListener("click", onClickNumber);
+
+      const onClickOperator = (op) => () => {
+        if (numTwo) {
+          switch (operator) {
+            case "+":
+              $resultInput.value = Number(numOne) + Number(numTwo);
+              break;
+            case "-":
+              $resultInput.value = Number(numOne) - Number(numTwo);
+              break;
+            case "*":
+              $resultInput.value = Number(numOne) * Number(numTwo);
+              break;
+            case "/":
+              $resultInput.value = Number(numOne) / Number(numTwo);
+              break;
+            default:
+              alert("오류 발생");
+              break;
+          }
+          numOne = $resultInput.value;
+          numTwo = "";
+        }
+        if (numOne) {
+          // numOne에 값이 있는가
+          operator = op;
+          $operator.value = op;
+        } else {
+          alert("숫자1을 입력하세요");
+        }
+      };
+
+      // 연산자 입력
+      document
+        .querySelector("#plus")
+        .addEventListener("click", onClickOperator("+"));
+      document
+        .querySelector("#minus")
+        .addEventListener("click", onClickOperator("-"));
+      document
+        .querySelector("#divide")
+        .addEventListener("click", onClickOperator("/"));
+      document
+        .querySelector("#multiply")
+        .addEventListener("click", onClickOperator("*"));
+
+      document
+        .querySelector("#calculate")
+        .addEventListener("click", function () {
+          //console.log(numOne, operator, numTwo);
+          if (numTwo) {
+            switch (operator) {
+              case "+":
+                $resultInput.value = Number(numOne) + Number(numTwo);
+                break;
+              case "-":
+                $resultInput.value = Number(numOne) - Number(numTwo);
+                break;
+              case "*":
+                $resultInput.value = Number(numOne) * Number(numTwo);
+                break;
+              case "/":
+                $resultInput.value = Number(numOne) / Number(numTwo);
+                break;
+              default:
+                alert("오류 발생");
+            }
+            numOne = "";
+            operator = "";
+            numTwo = "";
+            $operator.value = "";
+          } else {
+            alert("숫자 입력하세요!");
+          }
+        });
+
+      document.querySelector("#clear").addEventListener("click", function () {
+        numOne = "";
+        numTwo = "";
+        operator = "";
+        $operator.value = "";
+        $resultInput.value = "";
+      });
     </script>
   </body>
 </html>
