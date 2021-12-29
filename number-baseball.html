@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>숫자야구</title>
+  </head>
+  <body>
+    <form id="form">
+      <input type="number" id="input" />
+      <button>확인</button>
+    </form>
+    <!-- 사용자들의 기록 -->
+    <div id="logs"></div>
+    <script>
+      //1. 랜덤값 생성하기 (1 ~ 9까지)
+      //1-1.
+      //2. 사용자가 값 입력하기
+      //3. 사용자 입력값과 랜덤값 비교하기
+      //4. 자리수랑 다 동일시 스트라이크
+      //5. 숫자만 같으면 볼
+      //6. 다틀리면 아웃
+      //7. 시도 10번되면 빠꾸
+
+      const $form = document.querySelector("#form");
+      const $input = document.querySelector("#input");
+      const $logs = document.querySelector("#logs");
+
+      const number = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // 1~9
+
+      // 랜덤 숫자 뽑아내기
+      const answer = [];
+      for (let i = 0; i < 4; i++) {
+        const index = Math.floor(Math.random() * number.length);
+        answer.push(number[index]);
+        number.splice(index, 1);
+      }
+      console.log(answer);
+
+      // 이력 로그 배열
+      const tries = [];
+      function checkValue(input) {
+        if (input.length !== 4) {
+          return alert("4자리 숫자를 입력하세요");
+        }
+        if (new Set(input).size !== 4) {
+          return alert("중복되지않게 입력해주세요");
+        }
+        if (tries.includes(input)) {
+          return alert("이미 시도한 값입니다.");
+        }
+        return true;
+      }
+
+      $form.addEventListener("submit", () => {
+        event.preventDefault();
+        const value = $input.value;
+        $input.value = "";
+      });
+    </script>
+  </body>
+</html>
