@@ -65,11 +65,9 @@
 
       const $resultInput = document.querySelector("#result"); // 숫자확인란
       const $operator = document.querySelector("#operator"); // 연산자
-
       let numOne = "";
-      let numTwo = "";
       let operator = "";
-      let resultNum = "";
+      let numTwo = "";
 
       const onClickNumber = (event) => {
         // 비어있다
@@ -85,18 +83,6 @@
         numTwo += event.target.textContent;
         $resultInput.value += event.target.textContent;
       };
-
-      // 숫자 입력
-      document.querySelector("#num-1").addEventListener("click", onClickNumber);
-      document.querySelector("#num-2").addEventListener("click", onClickNumber);
-      document.querySelector("#num-3").addEventListener("click", onClickNumber);
-      document.querySelector("#num-4").addEventListener("click", onClickNumber);
-      document.querySelector("#num-5").addEventListener("click", onClickNumber);
-      document.querySelector("#num-6").addEventListener("click", onClickNumber);
-      document.querySelector("#num-7").addEventListener("click", onClickNumber);
-      document.querySelector("#num-8").addEventListener("click", onClickNumber);
-      document.querySelector("#num-9").addEventListener("click", onClickNumber);
-      document.querySelector("#num-0").addEventListener("click", onClickNumber);
 
       const onClickOperator = (op) => () => {
         if (numTwo) {
@@ -128,6 +114,17 @@
           alert("숫자1을 입력하세요");
         }
       };
+      // 숫자 입력
+      document.querySelector("#num-1").addEventListener("click", onClickNumber);
+      document.querySelector("#num-2").addEventListener("click", onClickNumber);
+      document.querySelector("#num-3").addEventListener("click", onClickNumber);
+      document.querySelector("#num-4").addEventListener("click", onClickNumber);
+      document.querySelector("#num-5").addEventListener("click", onClickNumber);
+      document.querySelector("#num-6").addEventListener("click", onClickNumber);
+      document.querySelector("#num-7").addEventListener("click", onClickNumber);
+      document.querySelector("#num-8").addEventListener("click", onClickNumber);
+      document.querySelector("#num-9").addEventListener("click", onClickNumber);
+      document.querySelector("#num-0").addEventListener("click", onClickNumber);
 
       // 연산자 입력
       document
