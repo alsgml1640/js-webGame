@@ -8,7 +8,7 @@
   </head>
   <body>
     <form id="form">
-      <input type="number" id="input" />
+      <input type="text" id="input" />
       <button>확인</button>
     </form>
     <!-- 사용자들의 기록 -->
@@ -53,10 +53,35 @@
         return true;
       }
 
+      // 확인 버튼 클릭 시
       $form.addEventListener("submit", () => {
         event.preventDefault();
         const value = $input.value;
         $input.value = "";
+
+        console.log(`value : ${value} , answer : ${answer.join("")}`);
+        // 입력값 확인 후
+        // 이상있으면
+        if (!checkValue(value)) {
+          return;
+        }
+        // 이상 없을 때
+        if (value === answer.join("")) {
+          // 다 맞으면 스트라이크
+          $logs.textContent = "홈런!";
+          return;
+        }
+        if (tries.length >= 9) {
+          // 시도 횟수 10번되면 패배
+          $logs.append(`패배입니다. 정답은 ${answer.join("")}`);
+        }
+
+        // 아니면 볼 스트라이크 구분
+
+        // 아웃 3번되면 패배
+
+        // 확인 버튼 클릭후 문제없으면 이력 로그에 푸시
+        tries.push(value);
       });
     </script>
   </body>
