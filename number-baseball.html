@@ -53,6 +53,8 @@
         return true;
       }
 
+      // 아웃 횟수
+      let out = 0;
       // 확인 버튼 클릭 시
       $form.addEventListener("submit", () => {
         event.preventDefault();
@@ -73,13 +75,49 @@
         }
         if (tries.length >= 9) {
           // 시도 횟수 10번되면 패배
-          $logs.append(`패배입니다. 정답은 ${answer.join("")}`);
+          $logs.append(
+            `패배입니다. 정답은 ${answer.join("")}`,
+            document.createElement("br")
+          );
         }
 
         // 아니면 볼 스트라이크 구분
+        let strike = 0;
+        let ball = 0;
+
+        answer.forEach(function (e, i) {
+          const index = value.indexOf(e);
+          if (index > -1) {
+            if (index === i) {
+              strike++; // 스트라이크
+            } else {
+              ball++; // ball
+            }
+          }
+        });
+
+        //아웃
+        if (strike === 0 && ball === 0) {
+          out++;
+          $logs.append(
+            `입력값 : ${value} , ${out} 아웃 `,
+            document.createElement("br")
+          );
+        } else {
+          $logs.append(
+            `입력값 : ${value} , 스트라이크 : ${strike} , 볼 : ${ball}`,
+            document.createElement("br")
+          );
+        }
 
         // 아웃 3번되면 패배
-
+        if (out === 3) {
+          $logs.append(
+            `패배입니다. 정답은 ${answer.join("")}`,
+            document.createElement("br")
+          );
+          return;
+        }
         // 확인 버튼 클릭후 문제없으면 이력 로그에 푸시
         tries.push(value);
       });
