@@ -34,6 +34,6 @@
 - [x] 아웃 횟수가 3번인지?
 - [x] 시도가 10번째인지?
 - [x] 볼, 스트라이크가 몇개인지?
-- [] 패배후 입력 불가하게 하기 -- removeEventListener 참고
+- [x] 패배후 입력 불가하게 하기 -- disabled true 적용 ,//removeEventListener 참고
 
 ###### 출처 - 제로초 자바스크립트 유튜브강의

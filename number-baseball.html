@@ -9,7 +9,7 @@
   <body>
     <form id="form">
       <input type="text" id="input" />
-      <button>확인</button>
+      <button id="btn">확인</button>
     </form>
     <!-- 사용자들의 기록 -->
     <div id="logs"></div>
@@ -26,6 +26,7 @@
       const $form = document.querySelector("#form");
       const $input = document.querySelector("#input");
       const $logs = document.querySelector("#logs");
+      const $btn = document.querySelector("#btn");
 
       const number = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // 1~9
 
@@ -61,7 +62,7 @@
         const value = $input.value;
         $input.value = "";
 
-        console.log(`value : ${value} , answer : ${answer.join("")}`);
+        //console.log(`value : ${value} , answer : ${answer.join("")}`);
         // 입력값 확인 후
         // 이상있으면
         if (!checkValue(value)) {
@@ -79,6 +80,8 @@
             `패배입니다. 정답은 ${answer.join("")}`,
             document.createElement("br")
           );
+          $btn.disabled = true;
+          return;
         }
 
         // 아니면 볼 스트라이크 구분
@@ -116,6 +119,7 @@
             `패배입니다. 정답은 ${answer.join("")}`,
             document.createElement("br")
           );
+          $btn.disabled = true;
           return;
         }
         // 확인 버튼 클릭후 문제없으면 이력 로그에 푸시
