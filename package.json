@@ -1,0 +1,22 @@
+{
+  "name": "js-webgame",
+  "version": "1.0.0",
+  "description": "- [x] 1.끝말잇기\r - [x] 2.계산기 작성\r - [x] 3.숫자 야구 게임\r - [] 4.로또 추첨기",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alsgml1640/js-webGame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alsgml1640/js-webGame/issues"
+  },
+  "homepage": "https://github.com/alsgml1640/js-webGame#readme",
+  "devDependencies": {
+    "cypress": "^9.2.0"
+  }
+}
