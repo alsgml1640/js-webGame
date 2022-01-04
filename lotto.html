@@ -23,11 +23,40 @@
     <div id="result">당첨 번호 :</div>
     <div id="bonus">보너스 :</div>
     <script>
+      const $result = document.querySelector("#result");
+      const $bonus = document.querySelector("#bonus");
       // 1~ 45까지 랜덤숫자담기
+      const allNumber = Array(45)
+        .fill()
+        .map((e, i) => i + 1);
+      //console.log(allNumber);
+      const suffle = [];
       // 무작위 랜덤숫자를 담을  셔플배열 생성
       // 랜덤배열에서 숫자를 뽑아 셔플배열에 넣기
       // 뽑은 배열은 랜덤배열에서 삭제
       // 뽑은 배열은 셔플배열에 푸쉬
+      while (allNumber.length > 0) {
+        const random = Math.floor(Math.random() * allNumber.length);
+        const spliceNum = allNumber.splice(random, 1);
+        const newNum = spliceNum[0];
+        suffle.push(newNum);
+      }
+
+      const winnerBall = suffle.splice(0, 6).sort((a, b) => a - b);
+      const bonusBall = suffle[0];
+
+      const drowBall = function (number, parent) {
+        const $ball = document.createElement("div");
+        $ball.className = "ball";
+        $ball.textContent = number;
+        parent.append($ball);
+      };
+
+      winnerBall.forEach(function (e, i) {
+        drowBall(e, $result);
+      });
+
+      drowBall(bonusBall, $bonus);
       // 6개 무작위, 1개는 보너스
       // 결과 배열은 1초씩 순차적으로 보여진다.
     </script>
