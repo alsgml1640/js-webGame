@@ -50,15 +50,41 @@
         $ball.className = "ball";
         $ball.textContent = number;
         parent.append($ball);
+        ballColor(number, $ball);
       };
 
-      winnerBall.forEach(function (e, i) {
-        drowBall(e, $result);
-      });
-
-      drowBall(bonusBall, $bonus);
       // 6개 무작위, 1개는 보너스
       // 결과 배열은 1초씩 순차적으로 보여진다.
+      winnerBall.forEach(function (e, i) {
+        setTimeout(() => {
+          drowBall(e, $result);
+        }, 1000 * (i + 1));
+      });
+
+      setTimeout(() => {
+        drowBall(bonusBall, $bonus);
+      }, 7000);
+
+      // 셀프체크 - 공 색칠하기
+      // 10미만 - 빨
+      // 20미만 - 주황
+      // 30미만 - 노란
+      // 40미만 - 파란
+      // 40이상 - 초록
+      // 힌트 - css
+      const ballColor = (number, $tag) => {
+        if (number < 10) {
+          $tag.style.backgroundColor = "red";
+        } else if (number < 20) {
+          $tag.style.backgroundColor = "Orange";
+        } else if (number < 30) {
+          $tag.style.backgroundColor = "yellow";
+        } else if (number < 40) {
+          $tag.style.backgroundColor = "blue";
+        } else {
+          $tag.style.backgroundColor = "green";
+        }
+      };
     </script>
   </body>
 </html>
