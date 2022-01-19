@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보</title>
+    <style>
+      #computer {
+        border: 1px solid black;
+        width: 180px;
+        height: 220px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="computer"></div>
+    <div id="btn">
+      <button class="scissors" class="btn">가위</button>
+      <button class="rock" class="btn">바위</button>
+      <button class="paper" class="btn">보</button>
+    </div>
+    <div class="score">0</div>
+    <script>
+      const $computer = document.querySelector("#computer");
+      const IMG_URL = "./rps.png";
+
+      // 가위바위보 위치
+      const rpsX = {
+        scissors: "0",
+        paper: "180px",
+        rock: "-250px",
+      };
+
+      let computerChoice = "scissors";
+      // 컴퓨터가 자동으로 이미지 변경하게
+      // setInterval로 함수 만들어서 지정
+      const changeComputerImg = function () {
+        if (computerChoice === "scissors") {
+          computerChoice = "rock";
+        } else if (computerChoice === "rock") {
+          computerChoice = "paper";
+        } else if (computerChoice === "paper") {
+          computerChoice = "scissors";
+        }
+        $computer.style.background = `url(${IMG_URL}) ${rpsX[computerChoice]} 0`;
+        $computer.style.backgroundSize = "auto 220px";
+      };
+
+      setInterval(changeComputerImg, 100);
+    </script>
+  </body>
+</html>
