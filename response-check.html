@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반응 속도 체크</title>
+    <style>
+      #screen {
+        width: 300px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+      .waiting {
+        background-color: darkblue;
+        color: wheat;
+      }
+      .ready {
+        background-color: tomato;
+        color: balck;
+      }
+      .go {
+        background-color: greenyellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="screen" class="waiting">클릭하세요!</div>
+    <div id="result"></div>
+    <script>
+      const $screen = document.querySelector("#screen");
+      const $result = document.querySelector("#result");
+
+      let startTime; // 시작 시간
+      let endTime; // 종료 시간
+
+      let randomTimer; // 랜덤 타이머
+
+      const scored = []; // 반응 속도 이력을 담을 배열
+      const screenClicked = function () {
+        // 첫화면
+        if (event.target.classList.contains("waiting")) {
+          $screen.classList.remove("waiting");
+          $screen.classList.add("ready");
+          $screen.textContent = "대기하세요!";
+          // 랜덤 타이머 실행
+          randomTimer = setTimeout(() => {
+            startTime = new Date();
+            $screen.classList.remove("ready");
+            $screen.classList.add("go");
+            $screen.textContent = "클릭하세요!";
+          }, Math.random() * 1000 + 2000);
+        }
+        // 대기 화면
+        else if (event.target.classList.contains("ready")) {
+          // 여기서 클릭하면 성급하다는 문구를 띄워야한다.
+          $screen.textContent = "성급했습니다!";
+          $screen.classList.remove("ready");
+          $screen.classList.add("waiting");
+          clearTimeout(randomTimer);
+        }
+        // 클릭해야할 화면!
+        else if (event.target.classList.contains("go")) {
+          endTime = new Date();
+          $screen.classList.remove("go");
+          $screen.classList.add("waiting");
+          const currentMs = endTime - startTime;
+          scored.push(currentMs);
+          const average = scored.reduce((a, c) => a + c) / scored.length;
+          $result.textContent = `반응 속도 : ${currentMs}ms , 평균 속도 : ${average}ms`;
+
+          // 반응 속도들 중에 빠른 순으로 랭킹 나열하기 (5개까지)
+          scored
+            .sort()
+            .slice(0, 5)
+            .forEach((e, i) => {
+              $result.append(
+                document.createElement("br"),
+                ` ${i + 1}등 : ${e}ms`
+              );
+            });
+        }
+      };
+      $screen.addEventListener("click", screenClicked);
+    </script>
+  </body>
+</html>
